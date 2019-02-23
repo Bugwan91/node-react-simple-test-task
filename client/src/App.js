@@ -14,29 +14,28 @@ class App extends Component {
     this.state = {
       currentTime: null
     };
-    this.nextTik = this.nextTik.bind(this);
+    this.nextTick = this.nextTick.bind(this);
   }
 
   componentWillMount() {
     fetchTime()
       .then(serverTime => {
         let date = new Date(serverTime);
-        console.log(date.getMinutes());
         this.setState({
           currentTime: serverTime
-        }, this.nextTik)
+        }, this.nextTick)
       })
       .catch(e => {
         console.log(e);
       })
   }
 
-  nextTik() {
+  nextTick() {
     setTimeout(() => {
       this.setState({
         currentTime: this.state.currentTime + 1000
       });
-      this.nextTik();
+      this.nextTick();
     }, 1000)
   }
 
